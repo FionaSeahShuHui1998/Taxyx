@@ -5,8 +5,10 @@ const database = require("./database");
 const express = require("express");
 
 const app = express();
+const userRoutes = require("./routes/userRoute");
 
 app.use(express.json());
+app.use("/", userRoutes);
 
 const PORT = process.env.PORT;
 
