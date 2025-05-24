@@ -1,0 +1,26 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment variables file
+.env
+
+# Optional npm cache folder
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Mac system files
+.DS_Store
+
+# VS Code settings folder (if you use VS Code)
+.vscode/
+
+# Build output (if you have build steps)
+dist/
+build/
