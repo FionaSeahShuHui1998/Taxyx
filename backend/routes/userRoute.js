@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 const creationOfNewUser = require("../controller/userController/createNewUser");
+const deletionOfUser = require("../controller/userController/deleteUser");
 const errorCodes = require("../utils/errorCodes");
 
 router.post("/createUser", async (req, res) => {
@@ -46,6 +47,22 @@ router.post("/createUser", async (req, res) => {
     }
     console.error("Error creating user:", error.message);
     res.status(500).json({ error: "Failed to create user." });
+  }
+});
+
+router.get("/deleteUser", async (req, res) => {
+  const { username } = req.body;
+
+  if (!username) {
+    return res.status(400).json({ error: "Username is required." });
+  }
+
+  try {
+    await deletionOfUser(username);
+    res.status(200).json({ message: "User deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting user:", error.message);
+    res.status(500).json({ error: "Failed to delete user." });
   }
 });
 
