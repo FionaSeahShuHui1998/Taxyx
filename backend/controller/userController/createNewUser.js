@@ -1,4 +1,4 @@
-console.log("Creating New User...");
+console.debug("Creating New User...");
 
 const dbConnection = require("../../database.js");
 

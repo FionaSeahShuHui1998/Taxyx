@@ -1,4 +1,4 @@
-console.log("Setting up user routes...");
+console.debug("Setting up user routes...");
 
 const express = require("express");
 const router = express.Router();
