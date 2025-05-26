@@ -2,9 +2,7 @@ console.debug("Checking if username exists...");
 
 const dbConnection = require("../../database.js");
 
-var usernameCheck = 0;
-
-async function checkIfUsernameExists(username) {
+async function checkUsernameExists(username) {
   const sqlQuery = "SELECT * FROM userHub WHERE username = ?";
   const values = [username];
 
@@ -16,4 +14,4 @@ async function checkIfUsernameExists(username) {
   }
 }
 
-module.exports = checkIfUsernameExists;
+module.exports = checkUsernameExists;

@@ -4,16 +4,16 @@ require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
 const dbConnection = require("../../database.js");
-const errorCodes = require("../../utils/errorCodes.js");
-const { VALID_ROLES } = require("../../utils/userConfig.js");
-const checkIfUsernameExists = require("./checkUsernameExist.js");
+const errorCodes = require("../../utils/errors/errorCodes.js");
+const { VALID_ROLES } = require("../../utils/config/userConfig.js");
+const checkUsernameExists = require("./checkUsername.js");
 const {
   isValidEmail,
   isValidFirstLastName,
   isValidPassword,
-} = require("../../utils/validators.js");
+} = require("../../utils/validators/index.js");
 
-async function creationOfNewUser(
+async function createUser(
   username,
   password,
   email,
@@ -35,7 +35,7 @@ async function creationOfNewUser(
     "INSERT INTO userHub (username, password, email, firstname, lastname, role) VALUES (?, ?, ?, ?, ?, ?)";
   const values = [username, hashedPassword, email, firstName, lastName, role];
   try {
-    const usernameExists = await checkIfUsernameExists(username);
+    const usernameExists = await checkUsernameExists(username);
     // Check if username exist
     if (usernameExists) {
       throw new Error(errorCodes.USERNAME_EXISTS);
@@ -67,4 +67,4 @@ async function creationOfNewUser(
   }
 }
 
-module.exports = creationOfNewUser;
+module.exports = createUser;

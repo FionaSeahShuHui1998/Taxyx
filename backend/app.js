@@ -24,7 +24,7 @@ app.listen(PORT, () => {
 
 const database = require("./database");
 
-const userRoutes = require("./routes/userRoute");
+const userRoutes = require("./routes/userRoutes");
 
 app.use(express.json());
 
