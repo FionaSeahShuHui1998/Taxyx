@@ -6,6 +6,10 @@ const router = express.Router();
 const creationOfNewUser = require("../controller/userController/createNewUser");
 const deletionOfUser = require("../controller/userController/deleteUser");
 const errorCodes = require("../utils/errorCodes");
+const {
+  viewingAllUsers,
+  viewingUser,
+} = require("../controller/userController/viewAllUsers");
 
 router.post("/createUser", async (req, res) => {
   const { username, password, email, firstName, lastName, role } = req.body;
@@ -66,6 +70,35 @@ router.get("/deleteUser", async (req, res) => {
     }
     console.error("Error deleting user:", error.message);
     res.status(500).json({ error: "Failed to delete user." });
+  }
+});
+
+router.get("/viewAllUsers", async (req, res) => {
+  try {
+    const userTable = await viewingAllUsers();
+    res.status(200).json(userTable);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Failed to retrieve users. " + error.message });
+  }
+});
+
+router.get("/viewUser", async (req, res) => {
+  const { username } = req.body;
+
+  if (!username) {
+    return res.status(400).json({ error: "Username is required." });
+  }
+
+  try {
+    const user = await viewingUser(username);
+    res.status(200).json(user[0]);
+  } catch (error) {
+    if (error.message === errorCodes.USERNAME_NOT_EXISTS) {
+      return res.status(404).json({ error: "Username does not exist." });
+    }
+    res.status(500).json({ error: "Failed to retrieve user." });
   }
 });
 
