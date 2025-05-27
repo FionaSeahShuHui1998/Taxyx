@@ -7,4 +7,5 @@ module.exports = {
   INVALID_FIRST_NAME: "Invalid_First_Name",
   INVALID_LAST_NAME: "Invalid_Last_Name",
   INVALID_PASSWORD: "Invalid_Password",
+  INVALID_UPDATE: "Invalid_Update",
 };
