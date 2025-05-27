@@ -1,7 +1,7 @@
 console.debug("Viewing user...");
 
 const dbConnection = require("../../database.js");
-const { USERNAME_NOT_EXISTS } = require("../../utils/errors/errorCodes.js");
+const errorCodes = require("../../utils/errors/errorCodes");
 const checkUsernameExists = require("./checkUsername.js");
 
 async function getUser(username) {
@@ -10,7 +10,7 @@ async function getUser(username) {
   try {
     const usenameExist = await checkUsernameExists(username);
     if (!usenameExist) {
-      throw new Error(USERNAME_NOT_EXISTS);
+      throw new Error(errorCodes.USERNAME_NOT_EXISTS);
     }
     const user = await dbConnection.query(sqlQuery, values);
     return user[0];

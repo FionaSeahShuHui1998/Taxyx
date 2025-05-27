@@ -8,11 +8,13 @@ const deleteUserRoute = require("./user/delete");
 const viewAllUsersRoute = require("./user/getAll");
 const viewUserRoute = require("./user/getOne");
 const editUserRoute = require("./user/edit");
+const loginUserRoute = require("./user/login");
 
 router.post("/createNewUser", createUserRoute);
 router.get("/deleteUser", deleteUserRoute);
 router.get("/viewAllUsers", viewAllUsersRoute);
 router.get("/viewUser", viewUserRoute);
 router.post("/editUser", editUserRoute);
+router.get("/loginUser", loginUserRoute);
 
 module.exports = router;
